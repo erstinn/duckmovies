@@ -29,23 +29,6 @@ body{
     background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url('moviebg.jpg');
 }
 
-input[type=text],
-input[type=number],
-input[type=email],
-input[type=password],
-select {
-    width: 400px;
-    height: 65px;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-    background-color: #35393b;
-    color: white;
-}
-
 input[type=submit] {
     width: 400px;
     height: 70px;
@@ -58,19 +41,6 @@ input[type=submit] {
     cursor: pointer;
     font-size: 25px;
     font-family: Monsterrat, sans-serif;
-}
-
-label[for=mail], 
-label[for=sub], 
-label[for=pass]{
-    font-family: Monsterrat, sans-serif;
-    font-size: 20px;
-}
-
-label[for=signin]{
-    font-family: Monsterrat, sans-serif;
-    font-size: 20px;
-    color: #ffd686;
 }
 
 .gcash{
