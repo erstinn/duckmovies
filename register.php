@@ -19,7 +19,7 @@ session_start();
     height: 600px;
     background-color: black;
     border-radius: 5px;
-    opacity: 0.7;
+    opacity: 0.8;
     font-family: verdana;
     font-weight: 600;
     font-size: 30;
@@ -69,7 +69,8 @@ label[for=pass]{
     font-size: 20px;
 }
 
-label[for=signin]{
+label[for=signin],
+label[for=trial]{
     font-family: Monsterrat, sans-serif;
     font-size: 20px;
     color: #ffd686;
@@ -83,6 +84,9 @@ input[type=submit]:hover {
 background-color: #ffd686;
 }
 
+label[for=signin]:hover{
+    color: #feb544;
+}
 
 </style>
 
@@ -120,6 +124,9 @@ Create account<br><br>
       <input type="submit" name="submit" value="Sign Up">
 
       <br><br><a href='login.php'><label for="signin">Sign in</label></a>
+
+      <label for="trial">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 month free trial</label>
       
     </form>
 

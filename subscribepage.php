@@ -19,7 +19,7 @@ session_start();
     height: 600px;
     background-color: black;
     border-radius: 5px;
-    opacity: 0.7;
+    opacity: 0.8;
     font-family: 'Segoe UI';
     padding: 100px;
     color: #ffffff;
