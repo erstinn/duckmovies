@@ -113,7 +113,7 @@ https://templatemo.com/tm-552-video-catalog
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
                                     <img src="img/evil_dead.jpeg" alt="Image" class="img-fluid tm-catalog-item-img">
-                                    <a href="shrek.php" class="position-absolute tm-img-overlay">
+                                    <a href="evil_dead.php" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
@@ -125,7 +125,7 @@ https://templatemo.com/tm-552-video-catalog
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
                                     <img src="img/flipped.jpeg" alt="Image" class="img-fluid tm-catalog-item-img">
-                                    <a href="video-page.html" class="position-absolute tm-img-overlay">
+                                    <a href="flipped.php" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
@@ -138,7 +138,7 @@ https://templatemo.com/tm-552-video-catalog
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
                                     <img src="img/joker.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
-                                    <a href="video-page.html" class="position-absolute tm-img-overlay">
+                                    <a href="joker.php" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
@@ -150,7 +150,7 @@ https://templatemo.com/tm-552-video-catalog
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
                                     <img src="img/shrek.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
-                                    <a href="video-page.html" class="position-absolute tm-img-overlay">
+                                    <a href="shrek.php" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
@@ -163,7 +163,7 @@ https://templatemo.com/tm-552-video-catalog
                             <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                                 <div class="position-relative tm-thumbnail-container">
                                     <img src="img/spirited_away.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
-                                    <a href="video-page.html" class="position-absolute tm-img-overlay">
+                                    <a href="spirited_away.php" class="position-absolute tm-img-overlay">
                                         <i class="fas fa-play tm-overlay-icon"></i>
                                     </a>
                                 </div>
