@@ -13,7 +13,7 @@ session_start();
 }
 .rectangle{
     position: absolute;
-    right: 700px;
+    right: 650px;
     top: 100px;
     width: 400px;
     height: 600px;
