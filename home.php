@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+    session_start();
+    if (isset($_SESSION['email']) && isset($_SESSION['pass'])) {
+?>  
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +15,7 @@
     <!-- https://fonts.google.com/ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-video-catalog.css">
-    <!--
+<!--
 
 TemplateMo 552 Video Catalog
 
@@ -34,7 +39,9 @@ https://templatemo.com/tm-552-video-catalog
                         <div class="col-5 col-md-8 ml-auto mr-0">
                             <div class="tm-site-nav">
                                 <nav class="navbar navbar-expand-lg mr-0 ml-auto" id="tm-main-nav">
-                                    <button class="navbar-toggler tm-bg-black py-2 px-3 mr-0 ml-auto collapsed" type="button" data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <button class="navbar-toggler tm-bg-black py-2 px-3 mr-0 ml-auto collapsed" type="button"
+                                        data-toggle="collapse" data-target="#navbar-nav" aria-controls="navbar-nav"
+                                        aria-expanded="false" aria-label="Toggle navigation">
                                         <span>
                                             <i class="fas fa-bars tm-menu-closed-icon"></i>
                                             <i class="fas fa-times tm-menu-opened-icon"></i>
@@ -52,7 +59,10 @@ https://templatemo.com/tm-552-video-catalog
                                                 <a class="nav-link tm-nav-link" href="contact.html">Contact</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="register.html">Register</a>
+                                                <a class="nav-link tm-nav-link" href="profile.php">Account</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link tm-nav-link" href="logout.php">Logout</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -75,10 +85,10 @@ https://templatemo.com/tm-552-video-catalog
             <div id="tm-video-container">
                 <video autoplay muted loop id="tm-video">
                     <!-- <source src="video/sunset-timelapse-video.mp4" type="video/mp4"> -->
-                    <source src="video/wheat-field.mp4" type="video/mp4">
-                </video>
+                        <source src="video/wheat-field.mp4" type="video/mp4">
+                </video>    
             </div>
-
+            
             <i id="tm-video-control-button" class="fas fa-pause"></i>
         </div>
 
@@ -97,60 +107,59 @@ https://templatemo.com/tm-552-video-catalog
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Actions</a></li>
                                     <li class="nav-item tm-category-item"><a href="#" class="nav-link tm-category-link">Featured</a></li>
                                 </ul>
-                            </div>
+                            </div>        
                         </div>
                     </div>
-
+                    
                     <div class="row tm-catalog-item-list">
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-01.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/shrek.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Aenean aliquet sapien</h3>
-                                <p class="tm-catalog-item-text">Video thumbnail has a link to another HTML page.
-                                    Categories <span class="tm-text-secondary">do not need</span> any JS.
-                                    They are just separated HTML pages. Paging is at the bottom to extend the list as long as you want.
+                                <p class="tm-catalog-item-text">Video thumbnail has a link to another HTML page. 
+                                    Categories <span class="tm-text-secondary">do not need</span> any JS. 
+                                    They are just separated HTML pages. Paging is at the bottom to extend the list as long as you want. 
                                     This can be a large catalog.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-02.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-02.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
                             </div>
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Mauris in odio vel odio</h3>
-                                <p class="tm-catalog-item-text">You may need TemplateMo for a quick chat or send an email if you have any question about this CSS template.
-                                    <span class="tm-text-secondary">font-family: 'Source Sans Pro', sans-serif; for this template.</span>
-                                </p>
+                                <p class="tm-catalog-item-text">You may need TemplateMo for a quick chat or send an email if you have any question about this CSS template. 
+                                    <span class="tm-text-secondary">font-family: 'Source Sans Pro', sans-serif; for this template.</span></p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-03.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-03.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>                            
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Sagittis sodales enim</h3>
-                                <p class="tm-catalog-item-text">You are allowed to use this video catalog for your business websites.
-                                    Please do not make a re-distribution of our template ZIP file on any template collection website.</p>
+                                <p class="tm-catalog-item-text">You are allowed to use this video catalog for your business websites. 
+                                Please do not make a re-distribution of our template ZIP file on any template collection website.</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-04.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-04.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Nam tincidunt consectetur</h3>
                                 <p class="tm-catalog-item-text">You can apply this template for your commercial CMS theme. Nam sem leo, imperdiet non lacinia eget, volutpat ac massa. Donec mattis in velit quis commodo. Cras nec rutrum arcu.</p>
@@ -158,7 +167,7 @@ https://templatemo.com/tm-552-video-catalog
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-05.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-05.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
@@ -170,11 +179,11 @@ https://templatemo.com/tm-552-video-catalog
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-06.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-06.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>                            
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Turpis massa aliquam</h3>
                                 <p class="tm-catalog-item-text">Nunc neque risus, ultrices sed luctus at, iaculis at arcu. Pellentesque rutrum velit nec sapien ullamcorper ultrices. Vestibulum lectus risus, laoreet pretium ipsum</p>
@@ -182,11 +191,11 @@ https://templatemo.com/tm-552-video-catalog
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-07.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-07.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>    
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Class aptent taciti sociosqu</h3>
                                 <p class="tm-catalog-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus bibendum orci sit amet dignissim rhoncus. Pellentesque pretium faucibus vestibulum.</p>
@@ -194,7 +203,7 @@ https://templatemo.com/tm-552-video-catalog
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-08.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-08.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
@@ -206,11 +215,11 @@ https://templatemo.com/tm-552-video-catalog
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                             <div class="position-relative tm-thumbnail-container">
-                                <img src="img/tn-09.jpg" alt="Image" class="img-fluid tm-catalog-item-img">
+                                <img src="img/tn-09.jpg" alt="Image" class="img-fluid tm-catalog-item-img">    
                                 <a href="video-page.html" class="position-absolute tm-img-overlay">
                                     <i class="fas fa-play tm-overlay-icon"></i>
                                 </a>
-                            </div>
+                            </div>                            
                             <div class="p-4 tm-bg-gray tm-catalog-item-description">
                                 <h3 class="tm-text-primary mb-3 tm-catalog-item-title">Sed mattis nisi erat</h3>
                                 <p class="tm-catalog-item-text">Integer ultricies mi eu aliquet cursus. Nam sem leo, imperdiet non lacinia eget, volutpat ac massa. Donec mattis in velit quis commodo. Cras nec rutrum arcu.</p>
@@ -252,8 +261,8 @@ https://templatemo.com/tm-552-video-catalog
                                 <li><a href="#">Sapien metus gravida</a></li>
                                 <li><a href="#">Eget consequat</a></li>
                                 <li><a href="#">Praesent eu pulvinar</a></li>
-                            </ul>
-                        </div>
+                            </ul>    
+                        </div>                        
                     </div>
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 mb-4">
                         <div class="p-5 tm-bg-gray h-100">
@@ -265,21 +274,27 @@ https://templatemo.com/tm-552-video-catalog
                                 <li><a href="#">Contact</a></li>
                                 <li><a href="#">Privacy Policies</a></li>
                             </ul>
-                        </div>
+                        </div>                        
                     </div>
                 </div> <!-- row -->
 
                 <footer class="row pt-5">
                     <div class="col-12">
-                        <p class="text-right">Copyright 2020 The Video Catalog Company
-
-                            - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
+                        <p class="text-right">Copyright 2020 The Video Catalog Company 
+                        
+                        - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
                     </div>
                 </footer>
             </div> <!-- tm-content-container -->
         </div>
 
     </div> <!-- .tm-page-wrap -->
+
+    <?php
+        } else { //end of if not logged in
+            header('Location: login.php');
+        }
+    ?>
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -298,11 +313,11 @@ https://templatemo.com/tm-552-video-catalog
                 newVidWidth = newVidHeight * vidWidth / vidHeight;
             }
 
-            if (newVidWidth > windowWidth) {
+            if(newVidWidth > windowWidth) {
                 marginLeft = -((newVidWidth - windowWidth) / 2);
             }
 
-            if (newVidHeight > 720) {
+            if(newVidHeight > 720) {
                 marginTop = -((newVidHeight - $('#tm-video-container').height()) / 2);
             }
 
@@ -314,14 +329,14 @@ https://templatemo.com/tm-552-video-catalog
             tmVideo.css('margin-top', marginTop);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             /************** Video background *********/
 
             setVideoSize();
 
             // Set video background size based on window size
             let timeout;
-            window.onresize = function() {
+            window.onresize = function () {
                 clearTimeout(timeout);
                 timeout = setTimeout(setVideoSize, 100);
             };
@@ -329,7 +344,7 @@ https://templatemo.com/tm-552-video-catalog
             // Play/Pause button for video background      
             const btn = $("#tm-video-control-button");
 
-            btn.on("click", function(e) {
+            btn.on("click", function (e) {
                 const video = document.getElementById("tm-video");
                 $(this).removeClass();
 
