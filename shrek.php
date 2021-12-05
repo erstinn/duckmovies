@@ -58,11 +58,8 @@ if ($_SESSION['subbed'] == false)
                                     </button>
                                     <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
                                         <ul class="navbar-nav text-uppercase">
-                                            <li class="nav-item active">
-                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies<span class="sr-only">(current)</span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="search.php">Search</a>
+                                        <li class="nav-item active">
+                                                <a class="nav-link tm-nav-link" href="home.php">Movies<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link tm-nav-link" href="profile.php">Account</a>
