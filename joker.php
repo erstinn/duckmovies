@@ -163,13 +163,7 @@
 
                 <footer class="row pt-5">
                     <div class="col-12">
-<<<<<<< HEAD
                         <p class="text-right">Copyright 2020 The Duckmovies Company</p>
-=======
-                        <p class="text-right">Copyright 2020 Duck Movies
-
-                            - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
->>>>>>> fe0c1aa6faa12f3264d39864a1c0518d5bc499a9
                     </div>
                 </footer>
             </div> <!-- .tm-content-container -->

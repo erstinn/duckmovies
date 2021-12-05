@@ -131,51 +131,42 @@
 					<div class="row mb-5 pb-4">
 						<div class="col-12">
 							<!-- Header -->
-							<h3 class="mb-4">Change Email Address</h3>
+							<h3 class="mb-4">Are you sure you want to delete your account?</h3>
                             <li style="float:right"><a href='profile.php' class='a1'><b><u>Back</u>&nbsp;&nbsp;&nbsp;</b></a></li><br>
-                            
+                            <p>To delete your account, please enter your email address and password.</p>
                             <table>
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                                <tr><td>Current Email Address: </td><td><input type="email" name="curremail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td>Enter Email: </td><td><input type="email" name="emailadd" required>&nbsp;&nbsp;</td></tr>
 
-                                <tr><td>Enter New Email Address: </td><td><input type="email" name="newemail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td>Enter Password: </td><td><input type="password" name="pw" required>&nbsp;&nbsp;</td></tr>
 
-                                <tr><td>Re-Enter New Email Address: </td><td><input type="email" name="confemail" required>&nbsp;&nbsp;</td></tr>
-                                <tr><td><button type="submit" name="submit" class="btn rounded-0 btn-primary tm-btn-small">Submit</td></tr>
-                            </form>
-                        </table>
+            
+                            </table>
+                            <br><button type="submit" name="submit" class="btn rounded-0 btn-primary tm-btn-small">Confirm Account Deletion</button><br>
+
+                        </form>
 
                         <?php
                         if(isset($_POST['submit'])){
                             if ($_SERVER["REQUEST_METHOD"] == "POST"){
-                                $curremail = $_POST['curremail'];
-                                $newemail = $_POST['newemail'];
-                                $confemail = $_POST['confemail'];
+                                $emailadd = $_POST['emailadd'];
+                                $pw = $_POST['pw'];
 
-                                $record = mysqli_query($conn, "select Email as emailchk from useraccounts where ID ='".$id."'");
-                                
-                                while($row = mysqli_fetch_array($record)){
-                                    if ($curremail == $row['emailchk']){
-                                        if(strcmp($newemail,$confemail)==0){
-                                            $update_email = "UPDATE useraccounts SET Email='$confemail' WHERE ID = '$id'";
-                                            if($conn->query($update_email)){
-                                                echo "Email has been updated successfully.";
-                                                $email = $newemail;
-                                                $_SESSION['email'] = $email;
-                                            }
-                                            else{
-                                                echo "There was an error with updating your password. Please try again...";
-                                            }
-                                            $conn->close();
+                                $record = mysqli_query($conn, "SELECT * FROM useraccounts WHERE Email='".$emailadd."' AND Password='".$pw."'");
+                                if($record->num_rows > 0){
+                                    while($row = mysqli_fetch_array($record)){
+                                        $del = "DELETE FROM useraccounts WHERE Email='".$emailadd."' AND Password='".$pw."'";
+                                        if ($conn->query($del)){
+                                            header("location: deleted.php");
                                         }
                                         else{
-                                            echo "New email and re-entered email should be the same. Please try again...";
+                                            echo "There was a problem with the deletion of your account. Please try again...";
                                         }
+                                    }
                                 }
                                 else{
-                                    echo "Current email is not the same with the email in our database. Please try again...";
-                                }
-                            }
+                                    echo "Wrong email/password...<br>";
+                                } 
                             }
                         }
                         

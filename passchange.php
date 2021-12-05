@@ -131,16 +131,17 @@
 					<div class="row mb-5 pb-4">
 						<div class="col-12">
 							<!-- Header -->
-							<h3 class="mb-4">Change Email Address</h3>
+							<h3 class="mb-4">Reset Password</h3>
                             <li style="float:right"><a href='profile.php' class='a1'><b><u>Back</u>&nbsp;&nbsp;&nbsp;</b></a></li><br>
                             
                             <table>
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                                <tr><td>Current Email Address: </td><td><input type="email" name="curremail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td>Current Password: </td><td><input type="password" name="currpw" required>&nbsp;&nbsp;</td></tr>
 
-                                <tr><td>Enter New Email Address: </td><td><input type="email" name="newemail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td>Enter New Password: </td><td><input type="password" name="newpw" required>&nbsp;&nbsp;</td></tr>
 
-                                <tr><td>Re-Enter New Email Address: </td><td><input type="email" name="confemail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td>Re-Enter New Password: </td><td><input type="password" name="confpw" required>&nbsp;&nbsp;</td></tr>
+
                                 <tr><td><button type="submit" name="submit" class="btn rounded-0 btn-primary tm-btn-small">Submit</td></tr>
                             </form>
                         </table>
@@ -148,20 +149,18 @@
                         <?php
                         if(isset($_POST['submit'])){
                             if ($_SERVER["REQUEST_METHOD"] == "POST"){
-                                $curremail = $_POST['curremail'];
-                                $newemail = $_POST['newemail'];
-                                $confemail = $_POST['confemail'];
+                                $currpw = $_POST['currpw'];
+                                $newpw = $_POST['newpw'];
+                                $confpw = $_POST['confpw'];
 
-                                $record = mysqli_query($conn, "select Email as emailchk from useraccounts where ID ='".$id."'");
+                                $sql = mysqli_query($conn, "select Password as pwchck from useraccounts where id='".$id."'");
                                 
-                                while($row = mysqli_fetch_array($record)){
-                                    if ($curremail == $row['emailchk']){
-                                        if(strcmp($newemail,$confemail)==0){
-                                            $update_email = "UPDATE useraccounts SET Email='$confemail' WHERE ID = '$id'";
-                                            if($conn->query($update_email)){
-                                                echo "Email has been updated successfully.";
-                                                $email = $newemail;
-                                                $_SESSION['email'] = $email;
+                                while($row = mysqli_fetch_array($sql)){
+                                    if ($currpw == $row['pwchck']){
+                                        if(strcmp($newpw,$confpw)==0){
+                                            $update_pw = "UPDATE useraccounts SET Password='$newpw' WHERE id = '$id'";
+                                            if($conn->query($update_pw)){
+                                                echo "Password has been updated successfully.";
                                             }
                                             else{
                                                 echo "There was an error with updating your password. Please try again...";
@@ -169,11 +168,11 @@
                                             $conn->close();
                                         }
                                         else{
-                                            echo "New email and re-entered email should be the same. Please try again...";
+                                            echo "New password and re-entered password should be the same. Please try again...";
                                         }
                                 }
                                 else{
-                                    echo "Current email is not the same with the email in our database. Please try again...";
+                                    echo "Current password is not the same with the old password. Please try again...";
                                 }
                             }
                             }
