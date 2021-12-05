@@ -152,7 +152,7 @@ if (isset($_POST['submit']) && $check != true) {
     if(!empty($_POST['subscribe'])){
         $pass = $_REQUEST["password"];
         $mail = $_REQUEST["email"];
-
+        
         header('location: subscribepage.php');
         $stmt = "INSERT INTO useraccounts (`Email`,`Password`) VALUES ('$mail', '$pass')";
 
