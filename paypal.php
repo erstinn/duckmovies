@@ -172,7 +172,7 @@ if (isset($_POST['submit'])) {
 /*TO DO: ERIN HELP
 FOR EXPIRED ACCOUNTS:
 1. Auto log out for each user acc if current date == expiry date
-2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial)
+2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial) - done
 */
 
 ?>
