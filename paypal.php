@@ -159,7 +159,8 @@ if (isset($_POST['submit'])) {
         //save Paypal details of user in DB
         $stmt = "UPDATE useraccounts SET `Payment details` = '$paypal' WHERE `Email` = '$email'";
         $payment = "UPDATE useraccounts SET `Date of Payment` = '$current_date' WHERE `Email` = '$email'";
-
+        $_SESSION['subbed'] = true;
+        
         if (mysqli_query($conn, $stmt) && mysqli_query($conn, $payment)) {
             echo "<h4>Data stored in a database successfully.</h4>";
         } else {
@@ -172,7 +173,7 @@ if (isset($_POST['submit'])) {
 /*TO DO: ERIN HELP
 FOR EXPIRED ACCOUNTS:
 1. Auto log out for each user acc if current date == expiry date
-2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial)
+2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial) - done
 */
 
 ?>
