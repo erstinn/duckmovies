@@ -159,7 +159,8 @@ if (isset($_POST['submit'])) {
         //save Paypal details of user in DB
         $stmt = "UPDATE useraccounts SET `Payment details` = '$paypal' WHERE `Email` = '$email'";
         $payment = "UPDATE useraccounts SET `Date of Payment` = '$current_date' WHERE `Email` = '$email'";
-
+        $_SESSION['subbed'] = true;
+        
         if (mysqli_query($conn, $stmt) && mysqli_query($conn, $payment)) {
             echo "<h4>Data stored in a database successfully.</h4>";
         } else {

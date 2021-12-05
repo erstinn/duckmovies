@@ -153,7 +153,6 @@ if ($conn->connect_error) {
 if (isset($_POST['submit'])) {
     $gcash = $_REQUEST["gcashnum"];
     $current_date = date('Y-m-d');
-    //di ko pa alam gagawin here sa expiry date ERIN help
     $expiry_date = date('Y-m-d', strtotime($current_date. '+ 30 days'));
     $email = $_POST['email'];
 
@@ -161,6 +160,8 @@ if (isset($_POST['submit'])) {
     //save Gcash details of user in DB
     $stmt = "UPDATE useraccounts SET `Payment details` = '$gcash' WHERE `Email` = '$email'";
     $payment = "UPDATE useraccounts SET `Date of Payment` = '$current_date' WHERE `Email` = '$email'";
+    $_SESSION['subbed'] = true;
+
 
     if (mysqli_query($conn, $stmt) && mysqli_query($conn, $payment)) {
         echo "<h4>Data stored in a database successfully.</h4>";
