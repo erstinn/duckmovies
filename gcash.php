@@ -16,7 +16,7 @@ session_start();
     right: 650px;
     top: 100px;
     width: 400px;
-    height: 700px;
+    height: 850px;
     background-color: black;
     border-radius: 5px;
     opacity: 0.8;
@@ -66,12 +66,14 @@ input[type=submit]:hover {
 background-color: #ffd686;
 }
 
-label[for=gcash]{
+label[for=gcash],
+label[for=accmail]{
     font-family: Monsterrat, sans-serif;
     font-size: 20px;
 }
 
-input[type=text]{
+input[type=text], 
+input[type=email]{
     width: 400px;
     height: 65px;
     padding: 12px 20px;
@@ -122,6 +124,11 @@ error_reporting(0);
 <p style="font-size: 30; margin : 0; padding-top:0; font-weight: 20">✓ Watch on laptop or TV</p><br><br>
 
 <!-- <p style="font-size:20">Choose your payment method</p> -->
+
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+
+<label for="accmail">Email</label><br>
+<input type="email" id="number" name="email" placeholder="Account Email" required><br><br>
 <label for="gcash">Account Number</label><br>
 <input type="text" id="number" name="gcashnum" placeholder="Gcash number" required>
 
@@ -143,24 +150,32 @@ if ($conn->connect_error) {
 }
 
 
-//incomplete
 if (isset($_POST['submit'])) {
-        $gcash = $_REQUEST["gcashnum"];
+    $gcash = $_REQUEST["gcashnum"];
+    $current_date = date('Y-m-d');
+    //di ko pa alam gagawin here sa expiry date ERIN help
+    $expiry_date = date('Y-m-d', strtotime($current_date. '+ 30 days'));
+    $email = $_POST['email'];
 
-        header('location: home.php');
-        //save Gcash details of user in DB
-        $stmt = "UPDATE user_accounts SET `Payment info` = '$gcash' WHERE `Email` = '$email'";
+    header('location: home.php');
+    //save Gcash details of user in DB
+    $stmt = "UPDATE useraccounts SET `Payment details` = '$gcash' WHERE `Email` = '$email'";
+    $payment = "UPDATE useraccounts SET `Date of Payment` = '$current_date' WHERE `Email` = '$email'";
 
-        if (mysqli_query($conn, $stmt)) {
-            echo "<h4>Data stored in a database successfully.</h4>";
-        } else {
-            echo "ERROR: Sorry $stmt. "
-            . mysqli_error($conn);
-        }
-        $conn->close();
+    if (mysqli_query($conn, $stmt) && mysqli_query($conn, $payment)) {
+        echo "<h4>Data stored in a database successfully.</h4>";
+    } else {
+        echo "ERROR: Sorry $stmt. "
+        . mysqli_error($conn);
+    }
+    $conn->close();
 }
 
-
+/*TO DO: ERIN HELP
+FOR EXPIRED ACCOUNTS:
+1. Auto log out for each user acc if current date == expiry date
+2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial)
+*/
 
 ?>
 

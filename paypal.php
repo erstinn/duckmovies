@@ -16,7 +16,7 @@ session_start();
     right: 650px;
     top: 100px;
     width: 400px;
-    height: 700px;
+    height: 850px;
     background-color: black;
     border-radius: 5px;
     opacity: 0.8;
@@ -106,6 +106,8 @@ input[type=submit] {
 <?php error_reporting(E_ALL ^ E_NOTICE); 
 
 error_reporting(0);
+
+
 ?>
 
 <img class ="logo" src = "logoduckmovies.png"/>
@@ -121,7 +123,11 @@ error_reporting(0);
 <p style="font-size: 30; margin : 0; padding-top:0; font-weight: 20">✓ Maximum of 4 phones or tablets you can have downloads on</p><br>
 <p style="font-size: 30; margin : 0; padding-top:0; font-weight: 20">✓ Watch on laptop or TV</p><br><br>
 
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+
 <label for="paypal">Email</label><br>
+<input type="email" id="number" name="email" placeholder="Account Email" required><br><br>
+<label for="paypal">Paypal Email</label><br>
 <input type="email" id="number" name="paypal" placeholder="Paypal Email" required>
 
 <input type="submit" name="submit" value="Pay Now">
@@ -141,16 +147,20 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-
 //incomplete (needs to save the currentdate in useraccounts when Pay Now button is clicked)
 if (isset($_POST['submit'])) {
         $paypal = $_REQUEST["paypal"];
+        $current_date = date('Y-m-d');
+        //ERIN HELP SA EXPIRY :')
+        $expiry_date = date('Y-m-d', strtotime($current_date. '+ 30 days'));
+        $email = $_POST['email'];
 
         header('location: home.php');
-        //save Gcash details of user in DB
-        $stmt = "UPDATE user_accounts SET `Payment info` = '$paypal' WHERE `Email` = '$email'";
+        //save Paypal details of user in DB
+        $stmt = "UPDATE useraccounts SET `Payment details` = '$paypal' WHERE `Email` = '$email'";
+        $payment = "UPDATE useraccounts SET `Date of Payment` = '$current_date' WHERE `Email` = '$email'";
 
-        if (mysqli_query($conn, $stmt)) {
+        if (mysqli_query($conn, $stmt) && mysqli_query($conn, $payment)) {
             echo "<h4>Data stored in a database successfully.</h4>";
         } else {
             echo "ERROR: Sorry $stmt. "
@@ -159,7 +169,11 @@ if (isset($_POST['submit'])) {
         $conn->close();
 }
 
-
+/*TO DO: ERIN HELP
+FOR EXPIRED ACCOUNTS:
+1. Auto log out for each user acc if current date == expiry date
+2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial)
+*/
 
 ?>
 
