@@ -9,26 +9,67 @@
     <!-- https://fonts.google.com/ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-video-catalog.css">
+    <style>
+        .u1{
+            list-style-type: none;
+            margin: auto;
+            padding: 10px;
+            overflow: hidden;
+        }
+        li{
+            list-style-type:none;
+            float:left;
+        }
+        li a{
+            display: block;
+            color:antiquewhite;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .a1:hover:not(.active){
+            background-color: #DBD3BF;
+        }
+
+        .a1{
+            padding: 3px;
+            color:dimgray;
+            border-radius: 10px;
+        }
+        hr{
+            border: 2px solid #fee4b3;
+        }
+    </style>
 </head>
 
 
 <body>
     <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'duckmovies');
+    session_start();
+    if (!isset($_SESSION['email'])) {
+        header('Location: login.php');
+    }
+    $email = $_SESSION['email'];
+
+    $conn = mysqli_connect('localhost', 'mici', 'missy08', 'duckmovies');
     if($conn->connect_error){
         echo "$conn->connect_error";
         die("Connection Failed : ".$conn->connect_error);
     }
 
-    $sql = mysqli_query($conn, "select * from movies where id = 5");
 
-    $title = $summary = $vid = $poster = "";
+    $sql = mysqli_query($conn, "select * from useraccounts where Email ='".$email."'");
+    $email = $password = $date = $payment = "";
     while($data = mysqli_fetch_array($sql)){
-        $title = $data['title'];
-        $summary = $data['summary'];
-        $vid = $data['vid'];
-        $poster = $data['poster'];
+        $email = $data['Email'];
+        $password = $data['Password'];
+        $date = $data['Date of payment'];
+        $payment = $data['Payment details'];
     }
+
+    $date = date('M d, Y', strtotime($date));
+    $nextdate = date('M d, Y', strtotime($date. ' + 1 month'));
     ?>
 	<div class="tm-page-wrap mx-auto">
 		<div class="position-relative">
@@ -54,14 +95,14 @@
                                     </button>
                                     <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
                                         <ul class="navbar-nav text-uppercase">
-                                            <li class="nav-item active">
-                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies<span class="sr-only">(current)</span></a>
+                                            <li class="nav-item">
+                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link tm-nav-link" href="search.php">Search</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="profile.php">Account</a>
+                                            <li class="nav-item active">
+                                                <a class="nav-link tm-nav-link" href="profile.php">Account<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link tm-nav-link" href="logout.php">Logout</a>
@@ -76,12 +117,11 @@
 			</div>
 			<div class="tm-welcome-container tm-fixed-header tm-fixed-header-2">
 				<div class="text-center">
-					<p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 text-white mx-auto">Your Account</p>                	
+					<p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 mt-lg-0 mt-5 text-white mx-auto">Your Account</p>                	
 				</div>                
             </div>
 
-			<!-- Header image -->
-            <div id="tm-fixed-header-bg"></div> 
+            <div id="tm-fixed-header-bg"></div> <!-- Header image -->
 		</div>
 
 		<!-- Page content -->
@@ -90,28 +130,37 @@
 				<main>
 					<div class="row mb-5 pb-4">
 						<div class="col-12">
-							<!-- Video player 1422x800 -->
-							Hello
-						</div>
-					</div>
+							<!-- Header -->
+							<h3 class="mb-4">Welcome to your Account Profile and Information</h3>
+                            <hr><br>
+                            <h4 class="mb-4">Your Information: </h4>
+                            <?php
+                            echo "<p><b>Email Address:</b> $email <br></p>";
+                            echo "<p><b>Last Date of Payment:</b> $date <br></p>";
+                            echo "<p><b>Next Date of Payment:</b> $nextdate <br></p>";
+                            echo "<br><hr><br>";
+                            ?>
+
+                            <h4>Account Settings</h4>
+                            <ul class="u1">
+                                <li><a href='emailchange.php' class='a1'><b><u>Change Email Address</u>&nbsp;&nbsp;&nbsp;</b></a></li>
+                                <li><a href='passchange.php' class='a1'><b>&nbsp;<u>Change Password</u></b>&nbsp;&nbsp;&nbsp;</a></li>
+                                <li><a href='deleteacc.php' class='a1'><b>&nbsp;<u>Delete Account</u></b>&nbsp;&nbsp;&nbsp;</a></li>
+                                <br><br>
+                            </ul>
+                        </div>
+					<!-- </div>
 					<div class="row mb-5 pb-5">
 						<div class="col-xl-8 col-lg-7">
-							<!-- Video description -->
+							Video description
 							<div class="tm-video-description-box">
-								<h2 class="mb-5 tm-video-title">Movie Title: <?php echo $title;?></h2>
-								<p class="mb-4"><b>Summary:</b><br> <?php echo $summary;?></p>
+								<p>Account Information</p>
 							</div>							
 						</div>
-						<div class="col-xl-4 col-lg-5">
-							<!-- Share box -->
-							<div class="tm-bg-gray tm-share-box">
-								<img src="img/<?php echo $poster;?>" width='280px'>							
-							</div>
-						</div>
-					</div>
-					<div class="row pt-4 pb-5">
 						
-					</div>
+					<div class="row pt-4 pb-5">
+						hatdog
+					</div> -->
 				</main>
 
                 <!-- COMMENT OUT KO MUNA TO -->
@@ -156,30 +205,13 @@
 
                 <footer class="row pt-5">
                     <div class="col-12">
-                        <p class="text-right">Copyright 2020 Duck Movies 
-                        
-                        - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
+                        <p class="text-right">Copyright 2020 The Duckmovies Company</p>
                     </div>
                 </footer>
 			</div> <!-- .tm-content-container -->
 		</div>
 	</div>
 
-	<script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-    	$(document).ready(function() {
-    		$('.tm-likes-box').click(function(e) {
-    			e.preventDefault();
-    			$(this).toggleClass('tm-liked');
-
-    			if($(this).hasClass('tm-liked')) {
-    				$('#tm-likes-count').html('486 likes');
-    			} else {
-    				$('#tm-likes-count').html('485 likes');
-    			}
-    		});
-    	});
-    </script>
 </body>
 </html>

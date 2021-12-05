@@ -3,32 +3,73 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch Movie</title>
+    <title>Account</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <!-- https://fonts.google.com/ -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/templatemo-video-catalog.css">
+    <style>
+        .u1{
+            list-style-type: none;
+            margin: auto;
+            padding: 10px;
+            overflow: hidden;
+        }
+        li{
+            list-style-type:none;
+            float:left;
+        }
+        li a{
+            display: block;
+            color:antiquewhite;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .a1:hover:not(.active){
+            background-color: #DBD3BF;
+        }
+
+        .a1{
+            padding: 3px;
+            color:dimgray;
+            border-radius: 10px;
+        }
+        hr{
+            border: 2px solid #fee4b3;
+        }
+    </style>
 </head>
 
 
 <body>
     <?php
+    session_start();
+    if (!isset($_SESSION['email'])) {
+        header('Location: login.php');
+    }
+    $email = $_SESSION['email'];
+
     $conn = mysqli_connect('localhost', 'mici', 'missy08', 'duckmovies');
     if($conn->connect_error){
         echo "$conn->connect_error";
         die("Connection Failed : ".$conn->connect_error);
     }
 
-    $sql = mysqli_query($conn, "select * from movies where id = 1");
 
-    $title = $summary = $vid = $poster = "";
+    $sql = mysqli_query($conn, "select * from useraccounts where Email ='".$email."'");
+    $email = $password = $date = $payment = "";
     while($data = mysqli_fetch_array($sql)){
-        $title = $data['title'];
-        $summary = $data['summary'];
-        $vid = $data['vid'];
-        $poster = $data['poster'];
+        $id = $data['ID'];
+        $email = $data['Email'];
+        $password = $data['Password'];
+        $date = $data['Date of payment'];
+        $payment = $data['Payment details'];
     }
+
+    
     ?>
 	<div class="tm-page-wrap mx-auto">
 		<div class="position-relative">
@@ -54,14 +95,14 @@
                                     </button>
                                     <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
                                         <ul class="navbar-nav text-uppercase">
-                                            <li class="nav-item active">
-                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies<span class="sr-only">(current)</span></a>
+                                            <li class="nav-item">
+                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link tm-nav-link" href="search.php">Search</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="profile.php">Account</a>
+                                            <li class="nav-item active">
+                                                <a class="nav-link tm-nav-link" href="profile.php">Account<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link tm-nav-link" href="logout.php">Logout</a>
@@ -74,14 +115,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="tm-welcome-container tm-fixed-header tm-fixed-header-1">
+			<div class="tm-welcome-container tm-fixed-header tm-fixed-header-2">
 				<div class="text-center">
-					<p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 text-white mx-auto">Watch <?php echo $title;?></p>                	
+					<p class="pt-5 px-3 tm-welcome-text tm-welcome-text-2 mb-1 mt-lg-0 mt-5 text-white mx-auto">Your Account</p>                	
 				</div>                
             </div>
 
-			<!-- Header image -->
-            <div id="tm-fixed-header-bg"></div> 
+            <div id="tm-fixed-header-bg"></div> <!-- Header image -->
 		</div>
 
 		<!-- Page content -->
@@ -90,31 +130,70 @@
 				<main>
 					<div class="row mb-5 pb-4">
 						<div class="col-12">
-							<!-- Video player 1422x800 -->
-							<video width="1422" height="800" controls autoplay>
-							  <source src="movies/<?php echo $vid?>" type="video/mp4">							  
-							Your browser does not support the video tag.
-							</video>
-						</div>
-					</div>
+							<!-- Header -->
+							<h3 class="mb-4">Reset Password</h3>
+                            <li style="float:right"><a href='profile.php' class='a1'><b><u>Back</u>&nbsp;&nbsp;&nbsp;</b></a></li><br>
+                            
+                            <table>
+                            <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                                <tr><td>Current Email Address: </td><td><input type="email" name="curremail" required>&nbsp;&nbsp;</td></tr>
+
+                                <tr><td>Enter New Email Address: </td><td><input type="email" name="newemail" required>&nbsp;&nbsp;</td></tr>
+
+                                <tr><td>Re-Enter New Email Address: </td><td><input type="email" name="confemail" required>&nbsp;&nbsp;</td></tr>
+                                <tr><td><button type="submit" name="submit" class="btn rounded-0 btn-primary tm-btn-small">Submit</td></tr>
+                            </form>
+                        </table>
+
+                        <?php
+                        if(isset($_POST['submit'])){
+                            if ($_SERVER["REQUEST_METHOD"] == "POST"){
+                                $curremail = $_POST['curremail'];
+                                $newemail = $_POST['newemail'];
+                                $confemail = $_POST['confemail'];
+
+                                $record = mysqli_query($conn, "select Email as emailchk from useraccounts where ID ='".$id."'");
+                                
+                                while($row = mysqli_fetch_array($record)){
+                                    if ($curremail == $row['emailchk']){
+                                        if(strcmp($newemail,$confemail)==0){
+                                            $update_email = "UPDATE useraccounts SET Email='$confemail' WHERE ID = '$id'";
+                                            if($conn->query($update_email)){
+                                                echo "Email has been updated successfully.";
+                                                $email = $newemail;
+                                                $_SESSION['email'] = $email;
+                                            }
+                                            else{
+                                                echo "There was an error with updating your password. Please try again...";
+                                            }
+                                            $conn->close();
+                                        }
+                                        else{
+                                            echo "New email and re-entered email should be the same. Please try again...";
+                                        }
+                                }
+                                else{
+                                    echo "Current email is not the same with the email in our database. Please try again...";
+                                }
+                            }
+                            }
+                        }
+                        
+                        ?>
+
+                        </div>
+					<!-- </div>
 					<div class="row mb-5 pb-5">
 						<div class="col-xl-8 col-lg-7">
-							<!-- Video description -->
+							Video description
 							<div class="tm-video-description-box">
-								<h2 class="mb-5 tm-video-title">Movie Title: <?php echo $title;?></h2>
-								<p class="mb-4"><b>Summary:</b><br> <?php echo $summary;?></p>
+								<p>Account Information</p>
 							</div>							
 						</div>
-						<div class="col-xl-4 col-lg-5">
-							<!-- Share box -->
-							<div class="tm-bg-gray tm-share-box">
-								<img src="img/<?php echo $poster;?>" width='280px'>							
-							</div>
-						</div>
-					</div>
-					<div class="row pt-4 pb-5">
 						
-					</div>
+					<div class="row pt-4 pb-5">
+						hatdog
+					</div> -->
 				</main>
 
                 <!-- COMMENT OUT KO MUNA TO -->
@@ -166,21 +245,6 @@
 		</div>
 	</div>
 
-	<script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-    	$(document).ready(function() {
-    		$('.tm-likes-box').click(function(e) {
-    			e.preventDefault();
-    			$(this).toggleClass('tm-liked');
-
-    			if($(this).hasClass('tm-liked')) {
-    				$('#tm-likes-count').html('486 likes');
-    			} else {
-    				$('#tm-likes-count').html('485 likes');
-    			}
-    		});
-    	});
-    </script>
 </body>
 </html>

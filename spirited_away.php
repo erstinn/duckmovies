@@ -158,10 +158,8 @@
                 </div> row -->
 
                 <footer class="row pt-5">
-                    <div class="col-12">
-                        <p class="text-right">Copyright 2020 Duck Movies 
-                        
-                        - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
+                <div class="col-12">
+                        <p class="text-right">Copyright 2020 The Duckmovies Company</p>
                     </div>
                 </footer>
 			</div> <!-- .tm-content-container -->

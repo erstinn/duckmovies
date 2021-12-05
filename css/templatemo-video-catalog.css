@@ -29,6 +29,8 @@ a:hover {
 
 h2, p { color: #666666; }
 
+h3, h4 { color: #666666; }
+
 .tm-site-header {
     position: absolute;
     z-index: 1000;
@@ -42,7 +44,7 @@ h2, p { color: #666666; }
     display: block;
     padding: 30px;
     width: 320px;
-    height: 160px;
+    height: 120px;
 }
 
 .tm-site-logo { font-size: 3rem; }
@@ -95,7 +97,7 @@ h2, p { color: #666666; }
 .tm-welcome-text { font-size: 3rem; }
 
 .btn {
-    padding: 15px 60px;
+    padding: 10px 50px;
     font-size: 1.6rem;
     border: none;
     cursor: pointer;
@@ -352,7 +354,7 @@ h2, p { color: #666666; }
 
 #tm-fixed-header-bg { height: 450px; }
 .tm-fixed-header-1 { background-image: url(../img/header.jpeg); }
-.tm-fixed-header-2 { background-image: url(../img/userheader.jpeg); }
+.tm-fixed-header-2 { background-image: url(../img/header-2.jpeg); }
 .tm-fixed-header-3 { background-image: url(../img/contact-1.jpg); }
 
 video {
@@ -526,3 +528,4 @@ video {
         flex-direction: column;
     }
 }
+
