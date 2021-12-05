@@ -1,5 +1,10 @@
 <?php
 session_start();
+// if user subscription is expired
+if (isset($_SESSION['subbed']))
+    if ($_SESSION['subbed'] == false)
+        header('Location: subscribepage.php');
+
 //for checking if already logged in
 if (isset($_SESSION['email']) && isset($_SESSION['pass'])) 
     header('Location: home.php');
@@ -145,14 +150,16 @@ $current_date = date('Y-m-d');
         $result = $conn->query($stmt);
         if ($result->num_rows > 0){
             while($row=$result->fetch_assoc())
-                $expiry_date = date('Y-m-d', strtotime($row['Date of Payment']. '+ 31 days'));
-                if ($expiry_date!=$current_date){ 
+                $expiry_date = date('Y-m-d', strtotime($row['Date of Payment']. '+ 30 days'));
+                if ($expiry_date < $current_date ){ 
                         // use SESSION variables to check if logged in for other pages 
+                        $_SESSION['subbed'] == true;
                         $_SESSION['email'] = $mail;
                         $_SESSION['pass'] = $pass;
                         header('Location: home.php');
                 }
                 else{
+                    $_SESSION['subbed'] == false;
                     header('location: subscribepage.php');
                 }
 
