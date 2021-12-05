@@ -14,7 +14,7 @@
 
 <body>
     <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'duckmovies');
+    $conn = mysqli_connect('localhost', 'mici', 'missy08', 'duckmovies');
     if($conn->connect_error){
         echo "$conn->connect_error";
         die("Connection Failed : ".$conn->connect_error);
@@ -38,7 +38,7 @@
                         <div class="col-7 col-md-4">
                             <a href="home.php" class="tm-bg-black text-center tm-logo-container">
                                 <i class="fas fa-video tm-site-logo mb-3"></i>
-                                <h1 class="tm-site-name">Movie Catalog</h1>
+                                <h1 class="tm-site-name"><img src='logoduckmovies.png' height='50px'></h1>
                             </a>
                         </div>
                         <div class="col-5 col-md-8 ml-auto mr-0">
@@ -55,13 +55,16 @@
                                     <div class="collapse navbar-collapse tm-nav" id="navbar-nav">
                                         <ul class="navbar-nav text-uppercase">
                                             <li class="nav-item active">
-                                                <a class="nav-link tm-nav-link" href="">Movies<span class="sr-only">(current)</span></a>
+                                                <a class="nav-link tm-nav-link" href="movlist.php">Movies<span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="about.html">Search Movies</a>
+                                                <a class="nav-link tm-nav-link" href="search.php">Search</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link tm-nav-link" href="">User Profile</a>
+                                                <a class="nav-link tm-nav-link" href="profile.php">Account</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link tm-nav-link" href="logout.php">Logout</a>
                                             </li>
                                         </ul>
                                     </div>
