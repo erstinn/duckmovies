@@ -3,7 +3,6 @@ session_start();
 //for checking if already logged in
 if (isset($_SESSION['email']) && isset($_SESSION['pass'])) 
     header('Location: home.php');
-
 ?>
 
 <html>
@@ -94,72 +93,80 @@ if (isset($_SESSION['email']) && isset($_SESSION['pass']))
 </style>
 
 <body>
-    <?php error_reporting(E_ALL ^ E_NOTICE);
+<?php error_reporting(E_ALL ^ E_NOTICE);
 
-    error_reporting(0);
-    ?>
+error_reporting(0);
+?>
 
-    <img class="logo" src="logoduckmovies.png" />
-
-
-    <div class="rectangle">
-
-        Login<br><br>
-
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-
-            <label for="mail">Email</label>
-            <input type="email" id="e" name="email" placeholder="Email" required>
-            <label for="pass">Password</label>
-            <input type="password" id="p" name="password" placeholder="Password" required>
-            <br>
+<img class="logo" src="logoduckmovies.png" />
 
 
-            <input type="submit" name="submit" value="Sign In">
+<div class="rectangle">
 
-            <br><br><a href='register.php'><label for="signin">Sign up</label></a>
+Login<br><br>
+
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+
+    <label for="mail">Email</label>
+    <input type="email" id="e" name="email" placeholder="Email" required>
+    <label for="pass">Password</label>
+    <input type="password" id="p" name="password" placeholder="Password" required>
+    <br>
 
 
-        </form>
+    <input type="submit" name="submit" value="Sign In">
+
+    <br><br><a href='register.php'><label for="signin">Sign up</label></a>
 
 
-        <?php
+</form>
 
-        $servername = "localhost";
-        $username = "mici";
-        $password = "missy08";
-        $dbname = "duckmovies";
-        $port = "3308";
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname, $port);
-        // Checking connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+
+<?php
+
+$servername = "localhost";
+$username = "mici";
+$password = "missy08";
+$dbname = "duckmovies";
+$port = "3308";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
+// Checking connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$current_date = date('Y-m-d');
+    if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password'])) {
+        $pass = $_REQUEST["password"];
+        $mail = $_REQUEST["email"];
+
+        $stmt = "SELECT * FROM useraccounts WHERE `Password` = '$pass' AND `Email` = '$mail'";
+        $result = $conn->query($stmt);
+        if ($result->num_rows > 0){
+            while($row=$result->fetch_assoc())
+                $expiry_date = date('Y-m-d', strtotime($row['Date of Payment']. '+ 31 days'));
+                if ($expiry_date!=$current_date){ 
+                        // use SESSION variables to check if logged in for other pages 
+                        $_SESSION['email'] = $mail;
+                        $_SESSION['pass'] = $pass;
+                        header('Location: home.php');
+                }
+                else{
+                    header('location: subscribepage.php');
+                }
+
+        } else {
+            echo "<font size='3' color='red'>Wrong email/password.</font>";
         }
+        $conn->close();
+    }
+    
 
 
 
-        if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password'])) {
-            $pass = $_REQUEST["password"];
-            $mail = $_REQUEST["email"];
-
-
-            $stmt = mysqli_query($conn, "SELECT `Email`, `Password` FROM useraccounts WHERE `Password` = '$pass' AND `Email` = '$mail'");
-            if (mysqli_num_rows($stmt) == 1) {
-                // use SESSION variables to check if logged in for other pages 
-                $_SESSION['email'] = $mail;
-                $_SESSION['pass'] = $pass;
-                header('Location: home.php');
-            } else {
-                echo "<font size='3' color='red'>Wrong email/password.</font>";
-            }
-            $conn->close();
-        }
-
-
-
-        ?>
-    </div>
+?>
+</div>
 
 
 </body>
