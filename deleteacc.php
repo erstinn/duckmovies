@@ -157,7 +157,7 @@
                                     while($row = mysqli_fetch_array($record)){
                                         $del = "DELETE FROM useraccounts WHERE Email='".$emailadd."' AND Password='".$pw."'";
                                         if ($conn->query($del)){
-                                            header("location: deleted.php");
+                                            ?><script type="text/javascript">location.href = 'deleted.php';</script><?php
                                         }
                                         else{
                                             echo "There was a problem with the deletion of your account. Please try again...";

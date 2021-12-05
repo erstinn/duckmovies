@@ -151,16 +151,16 @@ $current_date = date('Y-m-d');
         if ($result->num_rows > 0){
             while($row=$result->fetch_assoc())
                 $expiry_date = date('Y-m-d', strtotime($row['Date of Payment']. '+ 30 days'));
-                if ($expiry_date < $current_date ){ 
+                if ($current_date == $expiry_date || $current_date > $expiry_date ){ 
                         // use SESSION variables to check if logged in for other pages 
-                        $_SESSION['subbed'] == true;
-                        $_SESSION['email'] = $mail;
-                        $_SESSION['pass'] = $pass;
-                        header('Location: home.php');
+                        $_SESSION['subbed'] = false;
+                        header('location: subscribepage.php');
                 }
                 else{
-                    $_SESSION['subbed'] == false;
-                    header('location: subscribepage.php');
+                    $_SESSION['subbed'] = true;
+                    $_SESSION['email'] = $mail;
+                    $_SESSION['pass'] = $pass;
+                    header('Location: home.php');
                 }
 
         } else {

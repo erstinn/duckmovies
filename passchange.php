@@ -153,9 +153,9 @@
                                 $newpw = $_POST['newpw'];
                                 $confpw = $_POST['confpw'];
 
-                                $sql = mysqli_query($conn, "select Password as pwchck from useraccounts where id='".$id."'");
+                                $record = mysqli_query($conn, "select Password as pwchck from useraccounts where id='".$id."'");
                                 
-                                while($row = mysqli_fetch_array($sql)){
+                                while($row = mysqli_fetch_array($record)){
                                     if ($currpw == $row['pwchck']){
                                         if(strcmp($newpw,$confpw)==0){
                                             $update_pw = "UPDATE useraccounts SET Password='$newpw' WHERE id = '$id'";

@@ -19,7 +19,7 @@
             }
         </style>
     </head>
-    <body background="url('moviebg.jpg')">
+    <body style="background-image: url('moviebg.jpg');">
     <br><br>
         <div>
             <h3 style='text-align: center;'>You have successfully deleted your account.</h3>
