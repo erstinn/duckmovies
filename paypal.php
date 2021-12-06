@@ -151,7 +151,6 @@ if ($conn->connect_error) {
 if (isset($_POST['submit'])) {
         $paypal = $_REQUEST["paypal"];
         $current_date = date('Y-m-d');
-        //ERIN HELP SA EXPIRY :')
         $expiry_date = date('Y-m-d', strtotime($current_date. '+ 30 days'));
         $email = $_POST['email'];
 
@@ -169,12 +168,6 @@ if (isset($_POST['submit'])) {
         }
         $conn->close();
 }
-
-/*TO DO: ERIN HELP
-FOR EXPIRED ACCOUNTS:
-1. Auto log out for each user acc if current date == expiry date
-2. Stuck lang sila sa paypal/gcash page pag di sila nagbayad (free trial) - done
-*/
 
 ?>
 

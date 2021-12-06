@@ -64,7 +64,7 @@
     while($data = mysqli_fetch_array($sql)){
         $email = $data['Email'];
         $password = $data['Password'];
-        $date = $data['Date of payment'];
+        $date = $data['Date of Payment'];
         $payment = $data['Payment details'];
     }
 
