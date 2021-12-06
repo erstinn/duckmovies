@@ -94,6 +94,8 @@ label[for=signin]:hover{
 <?php error_reporting(E_ALL ^ E_NOTICE); 
 
 error_reporting(0);
+
+$check = false;
 ?>
 
 <img class ="logo" src = "logoduckmovies.png"/>
@@ -103,7 +105,7 @@ error_reporting(0);
 
 Create account<br><br>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+<form method="post">
 
       <label for="mail">Email</label>
       <input type="email" id="e" name="email" placeholder="Email" required>
@@ -149,12 +151,17 @@ if ($conn->connect_error) {
 
 
 if (isset($_POST['submit']) && $check != true) {
+    $pass = $_POST["password"];
+    $mail = $_POST["email"];
+
+    $current_date = date('Y-m-d');
+    $stmt = mysqli_query($conn, "INSERT INTO useraccounts (`ID`, `Email`,`Password`, `Payment details`, `Date of Payment`) 
+        VALUES (DEFAULT, '$mail', '$pass', DEFAULT, '$current_date')");
+
+
     if(!empty($_POST['subscribe'])){
-        $pass = $_REQUEST["password"];
-        $mail = $_REQUEST["email"];
         
         header('location: subscribepage.php');
-        $stmt = "INSERT INTO useraccounts (`Email`,`Password`) VALUES ('$mail', '$pass')";
 
         if (mysqli_query($conn, $stmt)) {
             echo "<h4>Data stored in a database successfully.</h4>";
@@ -165,7 +172,7 @@ if (isset($_POST['submit']) && $check != true) {
         $conn->close();
     }
     else{
-        header('location: home.php');
+        header('location: login.php?success');
     }
 }
 
